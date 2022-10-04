@@ -49,14 +49,15 @@ describe("activity", () => {
 
   /* For existing users */
   it("can play through the video and detect notes", () => {
-    cy.contains("Please wait while your page loads").should("exist");
+    cy.url().should("include", "/curriculum");
+    //cy.contains("Please wait while your page loads").should("exist");
     cy.contains("A Video Based Activity For the Ages!", {
       timeout: 10000,
     }).should("exist");
     cy.contains("What would you like to do?").should("exist");
     cy.contains("Start At The Beginning").click();
     cy.get("video#main-activity-player_html5_api").should("exist");
-    cy.wait(4000);
+    cy.wait(6000);
     cy.contains("Can you see this message? - ").should("exist"); // first note
     cy.contains("It would be nice to know if this note shows up").should(
       "exist"
@@ -79,6 +80,7 @@ describe("activity", () => {
   it("activity review page contains correct content", () => {
     cy.wait(8000);
     cy.contains("Personalizing your Activity Review…").should("exist");
+    cy.get("img").should("have.attr", "alt", "Kyber Staging logo");
     cy.contains("You have completed this Activity").should("exist");
     cy.contains("You can revisit the Activity").should("exist");
     cy.contains("Revisit Activity").should("exist");
@@ -86,7 +88,7 @@ describe("activity", () => {
     cy.contains("Your Recommendations").should("exist");
     cy.contains("Your Notes").should("exist");
     cy.contains("Your Pinned Content").should("exist");
-    cy.contains("Terms &amp; Conditions").should("exist");
+    cy.contains("Terms & Conditions").should("exist");
     cy.contains("Privacy Policy").should("exist");
     cy.contains("Powered By").should("exist");
     cy.contains("ArcheMedX").should("exist");
@@ -94,10 +96,14 @@ describe("activity", () => {
 
   it("two notes/moments exist", () => {
     cy.contains("I hope you aren't afraid of heights").should("exist");
+    cy.contains("This pauses the video").should("exist");
+    cy.contains("IMG_2487.jpg").should("exist");
     cy.contains("Climbing Ladders!").should("exist");
+    cy.contains("Can you see this message?").should("exist");
+    cy.contains("chasetag.mp4").should("exist");
   });
 
-  it("go home button is clicked", () => {
+  it.skip("go home button is clicked", () => {
     cy.contains("Go Home", { timeout: 10000 }).click();
   });
 });
