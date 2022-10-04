@@ -6,6 +6,7 @@ describe("login", () => {
   });
 
   it("login page contains correct content", () => {
+    cy.url().should("include", "/login");
     cy.get("#prompt-logo-center").should("exist");
     cy.contains("Welcome").should("exist");
     cy.contains("Log in to kyber-staging to continue to kyber-staging.").should(
@@ -50,7 +51,6 @@ describe("activity", () => {
   /* For existing users */
   it("can play through the video and detect notes", () => {
     cy.url().should("include", "/curriculum");
-    //cy.contains("Please wait while your page loads").should("exist");
     cy.contains("A Video Based Activity For the Ages!", {
       timeout: 10000,
     }).should("exist");
@@ -64,12 +64,12 @@ describe("activity", () => {
     );
     cy.contains("View Resources").should("exist");
     cy.wait(17000);
-    cy.contains("0:00:21").should("exist");
     cy.get('[data-test="active-moment-type-note"]', {
+      // second note
       timeout: 10000,
     }).should("exist");
     cy.contains("Educator Note").should("exist");
-    cy.contains("This pauses the video").should("exist"); // second note
+    cy.contains("This pauses the video").should("exist");
     cy.get('[data-test="thumbtack-to-pin"]').should("exist");
     cy.get('[data-test="continue-button-moment"]').should("exist");
     cy.get('[data-test="add-note-button-moment"]').should("exist");
