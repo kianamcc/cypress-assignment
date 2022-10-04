@@ -50,7 +50,7 @@ describe("activity", () => {
 
   /* For existing users */
   it("can play through the video and detect notes", () => {
-    cy.url().should("include", "/curriculum");
+    cy.url().should("include", "/curriculum", { timeout: 10000 });
     cy.contains("A Video Based Activity For the Ages!", {
       timeout: 10000,
     }).should("exist");
