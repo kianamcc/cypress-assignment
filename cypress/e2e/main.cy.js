@@ -103,7 +103,26 @@ describe("activity", () => {
     cy.contains("chasetag.mp4").should("exist");
   });
 
-  it.skip("go home button is clicked", () => {
+  // it("cirriculum page", () => {
+  //   cy.contains("Go Home", { timeout: 10000 }).click();
+  //   cy.contains("CURRICULUM").should("exist");
+  //   cy.contains("A Curriculum Fit for a Technical Assignment!").should("exist")
+  //   cy.contains("This is a basic curriculum a prospective intern could use to run tests on")
+  //   cy.get(`[aria-label="Application Menu"]`).should("exist")
+  // });
+});
+
+describe("cirriculum page", () => {
+  it("go home button clicked to go to cirriculum page", () => {
     cy.contains("Go Home", { timeout: 10000 }).click();
+  });
+  it("cirriculum page contains correct contents", () => {
+    // cy.contains("Go Home", { timeout: 10000 }).click();
+    cy.contains("CURRICULUM").should("exist");
+    cy.contains("A Curriculum Fit for a Technical Assignment!").should("exist");
+    cy.contains(
+      "This is a basic curriculum a prospective intern could use to run tests on"
+    );
+    cy.get(`[aria-label="Application Menu"]`).should("exist");
   });
 });
