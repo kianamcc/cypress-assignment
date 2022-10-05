@@ -1,5 +1,5 @@
 describe("login", () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit(
       "https://kyber.arche.services/api/v1/learner/curricula/67c8273c-1b6e-4d6d-9110-845f073f196f/activities/a8c60a05-23f5-4a0f-b8c2-90d2e413f097/authorize?identity-provider=kyber-staging"
     );
@@ -25,7 +25,10 @@ describe("login", () => {
   });
 
   it("can login to the application", () => {
-    cy.login("CandIntern2@somewhere.com", "WinterIzHere7!");
+    //cy.login("CandIntern2@somewhere.com", "WinterIzHere7!");
+    cy.get("#username").type("CandIntern2@somewhere.com"); // please try this instead of the custom command
+    cy.get("#password").type("WinterIzHere7!");
+    cy.contains("Continue").click();
   });
 });
 
@@ -102,14 +105,6 @@ describe("activity", () => {
     cy.contains("Can you see this message?").should("exist");
     cy.contains("chasetag.mp4").should("exist");
   });
-
-  // it("cirriculum page", () => {
-  //   cy.contains("Go Home", { timeout: 10000 }).click();
-  //   cy.contains("CURRICULUM").should("exist");
-  //   cy.contains("A Curriculum Fit for a Technical Assignment!").should("exist")
-  //   cy.contains("This is a basic curriculum a prospective intern could use to run tests on")
-  //   cy.get(`[aria-label="Application Menu"]`).should("exist")
-  // });
 });
 
 describe("cirriculum page", () => {
@@ -117,7 +112,6 @@ describe("cirriculum page", () => {
     cy.contains("Go Home", { timeout: 10000 }).click();
   });
   it("cirriculum page contains correct contents", () => {
-    // cy.contains("Go Home", { timeout: 10000 }).click();
     cy.contains("CURRICULUM").should("exist");
     cy.contains("A Curriculum Fit for a Technical Assignment!").should("exist");
     cy.contains(
